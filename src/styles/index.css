@@ -6,39 +6,6 @@
 @theme {
   --font-family: 'Geist', sans-serif;
 
-  --color-background: oklch(0.98 0.005 264);
-  --color-foreground: oklch(0.15 0.02 264);
-
-  --color-card: oklch(1 0 0);
-  --color-card-foreground: oklch(0.15 0.02 264);
-
-  --color-popover: oklch(1 0 0);
-  --color-popover-foreground: oklch(0.15 0.02 264);
-
-  --color-primary: oklch(0.55 0.22 240);
-  --color-primary-foreground: oklch(0.99 0 0);
-
-  --color-secondary: oklch(0.58 0.24 290);
-  --color-secondary-foreground: oklch(0.99 0 0);
-
-  --color-muted: oklch(0.96 0.005 264);
-  --color-muted-foreground: oklch(0.5 0.01 264);
-
-  --color-accent: oklch(0.62 0.18 200);
-  --color-accent-foreground: oklch(0.99 0 0);
-
-  --color-destructive: oklch(0.577 0.245 27.325);
-  --color-destructive-foreground: oklch(0.99 0 0);
-
-  --color-border: oklch(0.9 0.005 264);
-  --color-input: oklch(0.9 0.005 264);
-  --color-ring: oklch(0.55 0.22 240);
-
-  --radius: 0.75rem;
-}
-
-/* === Modo oscuro === */
-@theme dark {
   --color-background: oklch(0.12 0.02 250);
   --color-foreground: oklch(0.98 0.005 264);
 
@@ -67,20 +34,7 @@
   --color-input: oklch(0.24 0.02 250);
   --color-ring: oklch(0.65 0.24 240);
 
-  --color-chart-1: oklch(0.65 0.24 240);
-  --color-chart-2: oklch(0.7 0.2 200);
-  --color-chart-3: oklch(0.68 0.26 290);
-  --color-chart-4: oklch(0.72 0.22 160);
-  --color-chart-5: oklch(0.67 0.24 320);
-
-  --color-sidebar: oklch(0.16 0.02 250);
-  --color-sidebar-foreground: oklch(0.98 0.005 264);
-  --color-sidebar-primary: oklch(0.65 0.24 240);
-  --color-sidebar-primary-foreground: oklch(0.98 0.005 264);
-  --color-sidebar-accent: oklch(0.2 0.02 250);
-  --color-sidebar-accent-foreground: oklch(0.98 0.005 264);
-  --color-sidebar-border: oklch(0.24 0.02 250);
-  --color-sidebar-ring: oklch(0.65 0.24 240);
+  --radius: 0.75rem;
 }
 
 @layer base {
