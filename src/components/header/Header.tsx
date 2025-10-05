@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button } from '../ui/Button';
+
 import { scrollToSection } from '@/hook/ScrollToSection';
 
 export const HeaderComponent = () => {
@@ -49,9 +49,9 @@ export const HeaderComponent = () => {
             </button>
           </div>
 
-          <Button className='text-white ' variant='default' size='lg'>
+          {/* <Button className='text-white ' variant='default' size='lg'>
             Descargar CV
-          </Button>
+          </Button> */}
         </div>
       </div>
     </nav>

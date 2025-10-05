@@ -36,7 +36,6 @@ export const FormTouch = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      action='https://formspree.io/f/xovklnjl'
       className='bg-card border border-border rounded-2xl p-8 space-y-6 shadow-sm'
     >
       <div className='grid sm:grid-cols-2 gap-6'>
