@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/Button';
+import { scrollToSection } from '@/hook/ScrollToSection';
 
 export const HeaderComponent = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -27,18 +28,23 @@ export const HeaderComponent = () => {
           </button>
 
           <div className='hidden md:flex gap-8'>
-            <button className='text-sm text-Muted-Foreground hover:text-Foreground transition-colors'>
-              Sobre mi
-            </button>
-
-            <button className='text-sm text-Muted-Foreground hover:text-Foreground transition-colors'>
+            <button
+              onClick={() => scrollToSection('Experiencia')}
+              className='text-sm text-Muted-Foreground hover:text-Foreground transition-colors'
+            >
               Experiencia
             </button>
 
-            <button className='text-sm text-Muted-Foreground hover:text-Foreground transition-colors'>
-              Tecnologias
+            <button
+              onClick={() => scrollToSection('Tecnologías')}
+              className='text-sm text-Muted-Foreground hover:text-Foreground transition-colors'
+            >
+              Tecnologías
             </button>
-            <button className='text-sm text-Muted-Foreground hover:text-Foreground transition-colors'>
+            <button
+              onClick={() => scrollToSection('Proyecto')}
+              className='text-sm text-Muted-Foreground hover:text-Foreground transition-colors'
+            >
               Proyecto
             </button>
           </div>
