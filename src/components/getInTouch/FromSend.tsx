@@ -10,13 +10,12 @@ export const FormTouch = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
-
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
 
     try {
       const response = await fetch('https://formspree.io/f/xovklnjl', {
         method: 'POST',
-        body: formData,
+        body: new FormData(form),
         headers: {
           Accept: 'application/json',
         },
@@ -24,7 +23,7 @@ export const FormTouch = () => {
 
       if (response.ok) {
         setStatus('sent');
-        e.currentTarget.reset();
+        form.reset();
       } else {
         throw new Error('Error al enviar');
       }
@@ -37,6 +36,7 @@ export const FormTouch = () => {
   return (
     <form
       onSubmit={handleSubmit}
+      action='https://formspree.io/f/xovklnjl'
       className='bg-card border border-border rounded-2xl p-8 space-y-6 shadow-sm'
     >
       <div className='grid sm:grid-cols-2 gap-6'>
