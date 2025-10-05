@@ -1,6 +1,6 @@
 import { RenderProjects, type RenderProject } from './RenderProject';
-import SalonProject from '@/assets/images/salon.png';
-import QBabelProject from '@/assets/images/Qbabel.png';
+import SalonProject from '@/assets/images/salon.webp';
+import QBabelProject from '@/assets/images/Qbabel.webp';
 
 const projects: RenderProject[] = [
   {
