@@ -9,7 +9,14 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src/'), 
+      '@': path.resolve(__dirname, 'src/'),
+    },
+  },
+  server: {
+    host: true,
+    open: true,
+    watch: {
+      usePolling: true,
     },
   },
 });
