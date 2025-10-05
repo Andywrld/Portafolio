@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import HeroImage from '@/assets/images/modern-abstract-3d-geometric-shapes-representing-w.jpg';
+import { scrollToSection } from '@/hook/ScrollToSection';
 
 export const Hero = () => {
   return (
@@ -24,7 +25,7 @@ export const Hero = () => {
           <div className='space-y-6 sm:space-y-8 text-center lg:text-left'>
             <div className='space-y-4'>
               <p className='text-sm sm:text-base font-medium text-muted-fo uppercase tracking-wider'>
-                Desarrollador Full Stack
+                Desarrollador Fronted
               </p>
               <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance'>
                 Creando experiencias{' '}
@@ -41,6 +42,7 @@ export const Hero = () => {
               <Button
                 size='lg'
                 className='bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-transform shadow-lg shadow-primary/25'
+                onClick={() => scrollToSection('Proyecto')}
               >
                 Ver Proyectos
                 <ArrowDownIcon className='w-4 h-4 ml-2' />
@@ -49,6 +51,7 @@ export const Hero = () => {
                 size='lg'
                 variant='outline'
                 className='hover:bg-accent/10 hover:border-accent hover:scale-105 transition-all bg-transparent'
+                onClick={() => scrollToSection('Contáctame')}
               >
                 Contáctame
               </Button>
