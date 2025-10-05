@@ -10,6 +10,7 @@ import HTMLIcon from './HTML5.svg';
 import CSSIcon from './CSS3.svg';
 import PostmanIcon from './Postman.svg';
 import NestIcon from './Nest.js.svg';
+import RestIcon from './DjangoREST.svg'
 
 
 export {
@@ -24,5 +25,6 @@ export {
   TypeScriptIcon,
   PostgreSQLIcon,
   TailwindCSSIcon,
-  NestIcon
+  NestIcon,
+  RestIcon,
 };
