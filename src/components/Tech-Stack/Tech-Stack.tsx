@@ -12,6 +12,7 @@ import {
   CSSIcon,
   PostmanIcon,
   NestIcon,
+  RestIcon,
 } from '@/assets/icon/index';
 
 export const TechStack = () => {
@@ -35,10 +36,11 @@ export const TechStack = () => {
       items: [
         { name: 'PostgreSQL', icon: PostgreSQLIcon },
         { name: 'NestJS', icon: NestIcon },
+        { name: 'Django REST Framework', icon: RestIcon },
       ],
     },
     {
-      category: 'Tools',
+      category: 'Herramientas',
       items: [
         { name: 'Git', icon: GitIcon },
         { name: 'Docker', icon: DockerIcon },
@@ -50,9 +52,8 @@ export const TechStack = () => {
   return (
     <div className='container mx-auto px-6'>
       <div className='text-center mb-12'>
-        <h2 className='text-3xl md:text-4xl font-bold'>
-          <span className='font-mono'></span>
-          Tecnologias
+        <h2 className='text-3xl md:text-4xl font-bold text-primary'>
+          Tecnologías
         </h2>
       </div>
       <div className='max-w-2xl mx-auto'>

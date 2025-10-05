@@ -32,7 +32,7 @@ export const TechRender = ({ technologies }: TechnologyListProps) => {
                   alt={tech.name}
                   className='w-10 h-10 mb-2'
                 />
-                <span className='text-sm text-muted-foreground text-center'>
+                <span className='text-sm text-foreground text-center'>
                   {tech.name}
                 </span>
               </div>
