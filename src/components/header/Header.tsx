@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-
 import { scrollToSection } from '@/hook/ScrollToSection';
+import { Button } from '../ui/Button';
 
 export const HeaderComponent = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -49,9 +49,12 @@ export const HeaderComponent = () => {
             </button>
           </div>
 
-          {/* <Button className='text-white ' variant='default' size='lg'>
-            Descargar CV
-          </Button> */}
+          <Button className='text-white ' variant='default' size='lg'>
+            <a href='/Cv-Andy.pdf' download='Cv-Andy.pdf'>
+              {' '}
+              Descargar CV
+            </a>
+          </Button>
         </div>
       </div>
     </nav>
