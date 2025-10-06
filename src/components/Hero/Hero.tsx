@@ -28,9 +28,11 @@ export const Hero = () => {
                 Desarrollador Fronted
               </p>
               <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance'>
-                Creando experiencias{' '}
+                Soy <span className='text-primary'>Andy Torres</span>, creando
+                experiencias{' '}
                 <span className='text-primary'>digitales únicas</span>
               </h1>
+
               <p className='text-base sm:text-lg text-muted-foreground max-w-2xl text-pretty'>
                 Desarrollador apasionado por crear soluciones web innovadoras y
                 escalables. Especializado en tecnologías modernas y diseño
