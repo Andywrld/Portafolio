@@ -1,6 +1,7 @@
 import { RenderProjects, type RenderProject } from './RenderProject';
 import SalonProject from '@/assets/images/salon.webp';
 import QBabelProject from '@/assets/images/Qbabel.webp';
+import BankFlowProject from '@/assets/images/Bank-Flow.webp';
 
 const projects: RenderProject[] = [
   {
@@ -39,6 +40,26 @@ const projects: RenderProject[] = [
       'Django REST Framework    ',
     ],
     gitHub: 'https://github.com/Jose-luis-echemendia/QBabel',
+  },
+  {
+    image: {
+      img: BankFlowProject,
+      alt: 'Interfaz principal de BankFlow, simulador de cuentas bancarias',
+    },
+    title: 'BankFlow - Simulación de Cuentas Bancarias',
+    description:
+      'Aplicación web desarrollada como parte de una prueba técnica que simula el funcionamiento de un sistema bancario digital. Permite crear cuentas, registrar operaciones de ingreso y retiro, y visualizar el historial financiero de cada usuario. El proyecto destaca por su arquitectura modular, validaciones en tiempo real y una interfaz limpia y moderna construida con React y Tailwind CSS.',
+    tecnologies: [
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'React Query',
+      'Zustand',
+      'MockAPI',
+      'Vite',
+    ],
+    gitHub:
+      'https://github.com/Andywrld/Prueba--Tecnica-Frontend-Simulacion-de-Cuentas-Bancarias-',
   },
 ];
 

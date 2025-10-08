@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# Portafolio Web — Andy Torres
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web construida con React, TypeScript y Vite para presentar la trayectoria profesional de Andy Torres. El sitio destaca experiencia, proyectos relevantes, stack tecnológico y vías de contacto dentro de una interfaz moderna optimizada para dispositivos móviles y escritorio.
 
-Currently, two official plugins are available:
+## Características principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Sección hero con llamada a la acción directa hacia proyectos y contacto.
+- Listado de experiencia profesional con tecnologías clave por rol.
+- Galería de proyectos destacados con descripción, stack y repositorios.
+- Módulo de tecnologías que resume las herramientas dominadas por el autor.
+- Sección de contacto con enlaces rápidos a GitHub, LinkedIn y correo.
 
-## React Compiler
+## Stack tecnológico
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Framework:** React 19 + Vite (Rolldown)
+- **Lenguaje:** TypeScript
+- **Estilos:** Tailwind CSS
+- **Componentes e iconografía:** lucide-react, utilidades propias
 
-## Expanding the ESLint configuration
+## Requisitos previos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 18 o superior
+- npm, pnpm o Bun para la gestión de dependencias
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Instalación y ejecución
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# Instalar dependencias
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Servidor de desarrollo
+npm run dev
+
+# Compilación para producción
+npm run build
+
+# Vista previa del build
+npm run preview
+
+# Linter
+npm run lint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Si utilizas pnpm o Bun, sustituye los comandos anteriores por `pnpm` o `bun` respectivamente.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Estructura del proyecto
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+├─ public/              # Recursos estáticos y CV
+├─ src/
+│  ├─ components/       # Componentes reutilizables (Hero, Header, etc.)
+│  ├─ pages/            # Páginas principales (Home)
+│  ├─ assets/           # Imágenes e iconos
+│  └─ hook/             # Hooks personalizados como scrollToSection
+├─ index.html
+├─ vite.config.ts
+└─ README.md
+```
+
+## Personalización
+
+- Actualiza la información profesional en `src/components/experience/Experience.tsx`.
+- Modifica los proyectos destacados en `src/components/proje/Experience-Project.tsx`.
+- Ajusta enlaces y datos de contacto en `src/components/Hero/Hero.tsx` y `src/components/getInTouch`.
+
+## Despliegue
+
+El sitio está optimizado para servicios como Vercel, Netlify o GitHub Pages. Genera la versión estática con `npm run build` y sube la carpeta `dist` al proveedor elegido.
+
+## Contacto
+
+- LinkedIn: https://www.linkedin.com/in/andy-torres-9a1136259
+- GitHub: https://github.com/Andywrld
+- Email: andy18wrld@gmail.com
