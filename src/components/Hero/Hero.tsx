@@ -5,7 +5,7 @@ import {
   MailIcon,
 } from 'lucide-react';
 import { Button } from '../ui/Button';
-import HeroImage from '@/assets/images/modern-abstract-3d-geometric-shapes-representing-w.jpg';
+import HeroImage from '@/assets/images/modern-abstract-3d-geometric-shapes-representing-w.webp';
 import { scrollToSection } from '@/hook/ScrollToSection';
 
 export const Hero = () => {
