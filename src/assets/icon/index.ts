@@ -1,5 +1,5 @@
 import ReactIcon from './React.svg';
-import AngularIcon from './Angular.svg';
+
 import DockerIcon from './Docker.svg';
 import GitIcon from './Git.svg';
 import JavaScriptIcon from './JavaScript.svg';
@@ -10,15 +10,14 @@ import HTMLIcon from './HTML5.svg';
 import CSSIcon from './CSS3.svg';
 import PostmanIcon from './Postman.svg';
 import NestIcon from './Nest.js.svg';
-import RestIcon from './DjangoREST.svg'
-
+import RestIcon from './DjangoREST.svg';
+import Next from './nextjs_icon_dark.svg';
 
 export {
   HTMLIcon,
   CSSIcon,
   PostmanIcon,
   ReactIcon,
-  AngularIcon,
   DockerIcon,
   GitIcon,
   JavaScriptIcon,
@@ -27,4 +26,5 @@ export {
   TailwindCSSIcon,
   NestIcon,
   RestIcon,
+  Next,
 };

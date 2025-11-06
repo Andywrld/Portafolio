@@ -2,7 +2,7 @@ import { RenderExperience, type ExperienceRender } from './RenderExperience';
 
 const experiences: ExperienceRender[] = [
   {
-    position: 'Líder del equipo Frontend',
+    position: 'Desarrollador Frontend',
     company: 'CITMATEL',
     period: 'Enero - Presente',
     description:

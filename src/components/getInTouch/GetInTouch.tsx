@@ -8,16 +8,11 @@ export const GetInTouch = () => {
         <h2 className='text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4'>
           Contáctame
         </h2>
-        <p className='text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto'>
-          Estoy abierto a nuevas oportunidades y colaboraciones. No dudes en
-          contactarme para discutir cómo puedo contribuir a tu próximo proyecto.
-        </p>
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
-      
         <FormTouch />
-       
+
         <div className='flex flex-col gap-6'>
           <div className='p-6 flex flex-col items-center justify-center border border-border rounded-2xl bg-card text-center gap-3'>
             <div className='rounded-full bg-primary/10 h-10 w-10 flex items-center justify-center'>

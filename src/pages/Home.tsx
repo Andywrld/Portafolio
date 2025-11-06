@@ -2,7 +2,7 @@ import { Experience } from '@/components/experience/Experience';
 import { GetInTouch } from '@/components/getInTouch/GetInTouch';
 import { HeaderComponent } from '@/components/header/Header';
 import { Hero } from '@/components/Hero/Hero';
-import { Projects } from '@/components/proje/Experience-Project';
+import { Projects } from '@/components/project/Experience-Project';
 
 import { TechStack } from '@/components/Tech-Stack/Tech-Stack';
 

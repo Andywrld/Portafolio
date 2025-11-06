@@ -1,54 +1,7 @@
-import { TechRender, type TechnologyGroup } from './TechRender';
-import {
-  ReactIcon,
-  AngularIcon,
-  TailwindCSSIcon,
-  TypeScriptIcon,
-  JavaScriptIcon,
-  PostgreSQLIcon,
-  GitIcon,
-  DockerIcon,
-  HTMLIcon,
-  CSSIcon,
-  PostmanIcon,
-  NestIcon,
-  RestIcon,
-} from '@/assets/icon/index';
+import { technologies } from './contanst/tech';
+import { TechRender } from './TechRender';
 
 export const TechStack = () => {
-  const technologies: TechnologyGroup[] = [
-    {
-      category: 'Frontend',
-      items: [
-        { name: 'HTML', icon: HTMLIcon },
-        { name: 'CSS', icon: CSSIcon },
-
-        { name: 'Tailwind CSS', icon: TailwindCSSIcon },
-        { name: 'JavaScript', icon: JavaScriptIcon },
-        { name: 'TypeScript', icon: TypeScriptIcon },
-        { name: 'React', icon: ReactIcon },
-
-        { name: 'Angular', icon: AngularIcon },
-      ],
-    },
-    {
-      category: 'Backend',
-      items: [
-        { name: 'PostgreSQL', icon: PostgreSQLIcon },
-        { name: 'NestJS', icon: NestIcon },
-        { name: 'Django REST Framework', icon: RestIcon },
-      ],
-    },
-    {
-      category: 'Herramientas',
-      items: [
-        { name: 'Git', icon: GitIcon },
-        { name: 'Docker', icon: DockerIcon },
-        { name: 'Postman', icon: PostmanIcon },
-      ],
-    },
-  ];
-
   return (
     <div className='container mx-auto px-6'>
       <div className='text-center mb-12'>
