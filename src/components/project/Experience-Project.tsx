@@ -60,6 +60,7 @@ const projects: RenderProject[] = [
     ],
     gitHub:
       'https://github.com/Andywrld/Prueba--Tecnica-Frontend-Simulacion-de-Cuentas-Bancarias-',
+    demo: 'https://prueba-tecnica-frontend-simulacion.vercel.app/',
   },
 ];
 

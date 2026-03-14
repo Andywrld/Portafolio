@@ -1,4 +1,4 @@
-import { GithubIcon } from 'lucide-react';
+import { Eye, GithubIcon } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 type img = {
@@ -12,6 +12,7 @@ export interface RenderProject {
   description: string;
   tecnologies: string[];
   gitHub: string;
+  demo?: string;
 }
 
 export interface RenderProjectProps {
@@ -65,6 +66,18 @@ export const RenderProjects = ({ projects }: RenderProjectProps) => {
                     Código
                   </Button>
                 </a>
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <Button variant='outline' size='sm' className='gap-2'>
+                      <Eye size={16} />
+                      Demo
+                    </Button>
+                  </a>
+                )}
               </div>
             </div>
           </article>

@@ -4,9 +4,24 @@ const experiences: ExperienceRender[] = [
   {
     position: 'Desarrollador Frontend',
     company: 'CITMATEL',
-    period: 'Enero - Presente',
+    period: 'Septiembre 2024 - Enero 2025',
     description:
       'Encargado de liderar el desarrollo del portal oficial de meteorología de Cuba, supervisando la arquitectura frontend, las buenas prácticas de desarrollo, la optimización de rendimiento y la implementación de interfaces modernas e interactivas orientadas a la experiencia del usuario.',
+    tecnologies: [
+      'HTML',
+      'CSS',
+      'TypeScript',
+      'TailwindCSS',
+      'React',
+      'Docker',
+    ],
+  },
+  {
+    position: 'Líder Técnico Frontend',
+    company: 'Tecopos',
+    period: 'Septiembre - Presente',
+    description:
+      'Responsable técnico del frontend: planificación técnica, estimaciones, revisión de PRs y soporte al equipo para mantener entregas estables.Diseñé y consolidé una arquitectura de componentes moderna (design system / UIreusable) para mantener coherencia visual y reducir deuda técnica.Lideré refactorizaciones para mejorar escalabilidad del código y disminuir errores recurrentes en producción.',
     tecnologies: [
       'HTML',
       'CSS',
