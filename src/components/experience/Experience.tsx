@@ -6,7 +6,7 @@ const experiences: ExperienceRender[] = [
     company: 'CITMATEL',
     period: 'Septiembre 2024 - Enero 2025',
     description:
-      'Encargado de liderar el desarrollo del portal oficial de meteorología de Cuba, supervisando la arquitectura frontend, las buenas prácticas de desarrollo, la optimización de rendimiento y la implementación de interfaces modernas e interactivas orientadas a la experiencia del usuario.',
+      'Lideré el desarrollo del portal oficial de meteorología de Cuba, definiendo la arquitectura frontend y estableciendo estándares de calidad en el código. Implementé estrategias de optimización de rendimiento que mejoraron significativamente los tiempos de carga. Diseñé interfaces interactivas centradas en el usuario, garantizando accesibilidad y una experiencia fluida en múltiples dispositivos.',
     tecnologies: [
       'HTML',
       'CSS',
@@ -21,7 +21,7 @@ const experiences: ExperienceRender[] = [
     company: 'Tecopos',
     period: 'Septiembre - Presente',
     description:
-      'Responsable técnico del frontend: planificación técnica, estimaciones, revisión de PRs y soporte al equipo para mantener entregas estables.Diseñé y consolidé una arquitectura de componentes moderna (design system / UIreusable) para mantener coherencia visual y reducir deuda técnica.Lideré refactorizaciones para mejorar escalabilidad del código y disminuir errores recurrentes en producción.',
+      'Dirijo la estrategia técnica del frontend, incluyendo planificación, estimaciones y revisión de código mediante pull requests para asegurar entregas de alta calidad. Diseñé e implementé un design system con componentes reutilizables que unificó la identidad visual del producto y redujo la deuda técnica. Lideré refactorizaciones clave que mejoraron la escalabilidad de la aplicación y disminuyeron los errores recurrentes en producción.',
     tecnologies: [
       'HTML',
       'CSS',
