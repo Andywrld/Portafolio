@@ -1,233 +1,220 @@
 @import 'tailwindcss';
 @import '@/assets/font/fonts.css';
 
-@custom-variant dark (&:is(.dark *));
+/*
+  Design system — "engineered specimen"
+  Light, high-contrast, one committed accent (vermilion).
+  No gradient text, no glassmorphism, no neon. Type + precision carry it.
+*/
 
 @theme {
-  --font-family: 'Geist', sans-serif;
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Geist Mono', 'Menlo', monospace;
 
-  --color-background: oklch(0.12 0.02 250);
-  --color-foreground: oklch(0.98 0.005 264);
+  /* Surfaces — cool near-white paper, not warm cream */
+  --color-background: oklch(0.986 0.003 255);
+  --color-foreground: oklch(0.205 0.02 265);
 
-  --color-card: oklch(0.16 0.02 250);
-  --color-card-foreground: oklch(0.98 0.005 264);
+  --color-card: oklch(0.972 0.004 255);
+  --color-card-foreground: oklch(0.205 0.02 265);
 
-  --color-popover: oklch(0.16 0.02 250);
-  --color-popover-foreground: oklch(0.98 0.005 264);
+  --color-popover: oklch(0.986 0.003 255);
+  --color-popover-foreground: oklch(0.205 0.02 265);
 
-  --color-primary: oklch(0.65 0.24 240); /* Brighter cyan */
-  --color-primary-foreground: oklch(0.12 0.02 250);
+  /* Ink scale */
+  --color-muted: oklch(0.955 0.004 255);
+  --color-muted-foreground: oklch(0.46 0.017 265); /* ~7:1 on paper */
 
-  --color-secondary: oklch(0.68 0.26 290); /* Vibrant purple */
-  --color-secondary-foreground: oklch(0.12 0.02 250);
+  /* Accent — persimmon / vermilion. Warm tension on cool paper. */
+  --color-primary: oklch(0.56 0.192 33);
+  --color-primary-foreground: oklch(0.99 0.005 60);
 
-  --color-muted: oklch(0.2 0.02 250);
-  --color-muted-foreground: oklch(0.65 0.01 264);
+  /* Deep ink — for inverted blocks */
+  --color-secondary: oklch(0.22 0.022 265);
+  --color-secondary-foreground: oklch(0.97 0.004 255);
 
-  --color-accent: oklch(0.7 0.2 200); /* Bright teal accent */
-  --color-accent-foreground: oklch(0.12 0.02 250);
+  --color-accent: oklch(0.56 0.192 33);
+  --color-accent-foreground: oklch(0.99 0.005 60);
 
-  --color-destructive: oklch(0.55 0.25 27);
-  --color-destructive-foreground: oklch(0.98 0.005 264);
+  --color-destructive: oklch(0.55 0.2 27);
+  --color-destructive-foreground: oklch(0.99 0.005 60);
 
-  --color-border: oklch(0.24 0.02 250);
-  --color-input: oklch(0.24 0.02 250);
-  --color-ring: oklch(0.65 0.24 240);
+  --color-border: oklch(0.9 0.006 260);
+  --color-input: oklch(0.9 0.006 260);
+  --color-ring: oklch(0.56 0.192 33);
 
-  --radius: 0.75rem;
+  --radius: 0.5rem;
+
+  /* Emil easings — CSS built-ins are too weak */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply bg-background text-foreground;
+    @apply border-border;
   }
 
   html {
     scroll-behavior: smooth;
+    /* Fixed header offset for anchor scrolling */
+    scroll-padding-top: 6rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+
+  /* Balanced headings, pretty prose */
+  h1, h2, h3 {
+    text-wrap: balance;
+    letter-spacing: -0.03em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
-/* ── Animations ── */
+/* ── Reveal on scroll ──
+   Content is visible by default; the hidden pre-state only applies
+   when JS is present (html.js), so no-JS / headless renders never ship blank. */
+.reveal {
+  opacity: 1;
+}
 
-@keyframes fade-in-up {
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger children of a revealed group */
+html.js .reveal[data-stagger].is-visible > * {
+  animation: reveal-item 0.6s var(--ease-out-expo) both;
+}
+html.js .reveal[data-stagger].is-visible > *:nth-child(1) { animation-delay: 0ms; }
+html.js .reveal[data-stagger].is-visible > *:nth-child(2) { animation-delay: 60ms; }
+html.js .reveal[data-stagger].is-visible > *:nth-child(3) { animation-delay: 120ms; }
+html.js .reveal[data-stagger].is-visible > *:nth-child(4) { animation-delay: 180ms; }
+html.js .reveal[data-stagger].is-visible > *:nth-child(5) { animation-delay: 240ms; }
+html.js .reveal[data-stagger].is-visible > *:nth-child(6) { animation-delay: 300ms; }
+html.js .reveal[data-stagger].is-visible > *:nth-child(7) { animation-delay: 360ms; }
+html.js .reveal[data-stagger].is-visible > *:nth-child(8) { animation-delay: 420ms; }
+
+@keyframes reveal-item {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
-@keyframes fade-in-down {
-  from {
-    opacity: 0;
-    transform: translateY(-16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ── Micro utilities ── */
+
+/* Pressable feedback — the interface should feel like it's listening */
+.pressable {
+  transition: transform 0.16s var(--ease-out-quart);
+}
+.pressable:active {
+  transform: scale(0.97);
 }
 
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+/* Animated underline for links / nav */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s var(--ease-out-expo);
+}
+.link-underline:hover {
+  background-size: 100% 1.5px;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
+/* Blueprint dot grid — subtle engineering texture, not neon */
+.blueprint {
+  background-image: radial-gradient(
+    var(--color-border) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
 }
 
-@keyframes rotate-glow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Hairline that fades out — replaces the gradient rules */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--color-border),
+    transparent
+  );
 }
 
-@keyframes nav-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(-100%) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+/* Marquee for the tech ticker */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
 }
 
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
+/* ── Reduced motion: keep meaning, drop movement ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  html.js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: opacity 0.3s ease;
   }
-}
-
-@keyframes shimmer {
-  from {
-    background-position: -200% 0;
+  html.js .reveal[data-stagger].is-visible > * {
+    animation: none;
   }
-  to {
-    background-position: 200% 0;
+  .marquee-track {
+    animation: none;
   }
-}
-
-@keyframes grid-fade {
-  0%, 100% {
-    opacity: 0.03;
-  }
-  50% {
-    opacity: 0.08;
+  .pressable:active {
+    transform: none;
   }
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-fade-in-down {
-  animation: fade-in-down 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-gradient-shift {
-  background-size: 200% 200%;
-  animation: gradient-shift 4s ease infinite;
-}
-
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-.animate-rotate-glow {
-  animation: rotate-glow 8s linear infinite;
-}
-
-.animate-nav-slide-in {
-  animation: nav-slide-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-shimmer {
-  background-size: 200% 100%;
-  animation: shimmer 3s linear infinite;
-}
-
-.animate-grid-fade {
-  animation: grid-fade 6s ease-in-out infinite;
-}
-
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
-.delay-600 { animation-delay: 600ms; }
-.delay-700 { animation-delay: 700ms; }
-.delay-800 { animation-delay: 800ms; }
-
-/* Nav link animated underline */
-.nav-link {
-  position: relative;
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-  border-radius: 999px;
-  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.nav-link:hover::after {
-  width: 100%;
-  left: 0%;
-}
-
-/* Gradient text utility */
-.text-gradient {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-secondary));
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-shift 4s ease infinite;
-}
-
-/* Hero grid background */
-.hero-grid {
-  background-image:
-    linear-gradient(var(--color-primary) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-primary) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-/* Mobile menu */
-.mobile-menu-enter {
-  animation: fade-in-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+/* Hover intent only on real pointers */
+@media (hover: hover) and (pointer: fine) {
+  .hover-lift {
+    transition: transform 0.4s var(--ease-out-expo), border-color 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
 }

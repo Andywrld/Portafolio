@@ -1,6 +1,9 @@
-import { SendIcon } from 'lucide-react';
+import { CheckCircle2, SendIcon } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useState } from 'react';
+
+const fieldClass =
+  'w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25';
 
 export const FormTouch = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>(
@@ -16,9 +19,7 @@ export const FormTouch = () => {
       const response = await fetch('https://formspree.io/f/xovklnjl', {
         method: 'POST',
         body: new FormData(form),
-        headers: {
-          Accept: 'application/json',
-        },
+        headers: { Accept: 'application/json' },
       });
 
       if (response.ok) {
@@ -36,11 +37,14 @@ export const FormTouch = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='bg-card border border-border rounded-2xl p-8 space-y-6 shadow-sm'
+      className='space-y-5 rounded-2xl border border-border bg-card p-6 sm:p-8'
     >
-      <div className='grid sm:grid-cols-2 gap-6'>
+      <div className='grid gap-5 sm:grid-cols-2'>
         <div className='space-y-2'>
-          <label htmlFor='name' className='text-sm font-medium text-foreground'>
+          <label
+            htmlFor='name'
+            className='font-mono text-xs uppercase tracking-wide text-muted-foreground'
+          >
             Nombre
           </label>
           <input
@@ -49,13 +53,13 @@ export const FormTouch = () => {
             type='text'
             placeholder='Tu nombre'
             required
-            className='w-full bg-background border border-border rounded-lg p-3 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:outline-none'
+            className={fieldClass}
           />
         </div>
         <div className='space-y-2'>
           <label
             htmlFor='email'
-            className='text-sm font-medium text-foreground'
+            className='font-mono text-xs uppercase tracking-wide text-muted-foreground'
           >
             Email
           </label>
@@ -65,7 +69,7 @@ export const FormTouch = () => {
             type='email'
             placeholder='tu@email.com'
             required
-            className='w-full bg-background border border-border rounded-lg p-3 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:outline-none'
+            className={fieldClass}
           />
         </div>
       </div>
@@ -73,43 +77,44 @@ export const FormTouch = () => {
       <div className='space-y-2'>
         <label
           htmlFor='message'
-          className='text-sm font-medium text-foreground'
+          className='font-mono text-xs uppercase tracking-wide text-muted-foreground'
         >
           Mensaje
         </label>
         <textarea
           id='message'
           name='message'
-          placeholder='Cuéntame sobre tu proyecto...'
+          placeholder='Contame sobre tu proyecto…'
           rows={6}
           required
-          className='w-full bg-background border border-border rounded-lg p-3 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:outline-none resize-none'
-        ></textarea>
+          className={`${fieldClass} resize-none`}
+        />
       </div>
 
       <Button
         type='submit'
         size='lg'
         disabled={status === 'sending'}
-        className='w-full bg-blue-500 hover:bg-blue-600 text-white rounded-xl flex items-center justify-center gap-2 transition-all'
+        className='w-full'
       >
         {status === 'sending' ? (
-          'Enviando...'
+          'Enviando…'
         ) : (
           <>
-            <SendIcon className='w-4 h-4' /> Enviar Mensaje
+            <SendIcon className='h-4 w-4' /> Enviar mensaje
           </>
         )}
       </Button>
 
       {status === 'sent' && (
-        <p className='text-green-600 text-sm text-center'>
-          ✅ Mensaje enviado correctamente.
+        <p className='flex items-center justify-center gap-2 text-sm font-medium text-primary'>
+          <CheckCircle2 className='h-4 w-4' /> Mensaje enviado. Te respondo
+          pronto.
         </p>
       )}
       {status === 'error' && (
-        <p className='text-red-600 text-sm text-center'>
-          ❌ Error al enviar el mensaje.
+        <p className='text-center text-sm font-medium text-destructive'>
+          Hubo un error al enviar. Probá de nuevo o escribime por email.
         </p>
       )}
     </form>

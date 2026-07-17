@@ -1,18 +1,19 @@
-import { ArrowUpRightIcon, GithubIcon } from 'lucide-react';
-
-type img = {
-  img: string;
-  alt: string;
-};
+import { ArrowUpRight, Github, ImageIcon } from 'lucide-react';
+import { useReveal } from '@/hook/useReveal';
 
 export interface RenderProject {
-  image: img;
+  index: string;
+  image?: { img: string; alt: string };
+  /** When true, renders a reserved frame instead of an image (photo pending). */
+  placeholder?: boolean;
   title: string;
+  context: string;
   description: string;
+  highlights?: string[];
   tecnologies: string[];
-  gitHub: string;
+  gitHub?: string;
   demo?: string;
-  featured?: boolean;
+  status?: string;
 }
 
 export interface RenderProjectProps {
@@ -20,129 +21,142 @@ export interface RenderProjectProps {
 }
 
 export const RenderProjects = ({ projects }: RenderProjectProps) => {
-  const featured = projects.find((p) => p.featured);
-  const rest = projects.filter((p) => !p.featured);
-
   return (
-    <div className='space-y-8'>
-      {/* Featured project - full width */}
-      {featured && <ProjectCard project={featured} variant='featured' />}
-
-      {/* Other projects - 2 columns */}
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-        {rest.map((project) => (
-          <ProjectCard key={project.title} project={project} variant='default' />
-        ))}
-      </div>
+    <div className='space-y-6'>
+      {projects.map((project, i) => (
+        <ProjectBlock key={project.title} project={project} flip={i % 2 === 1} />
+      ))}
     </div>
   );
 };
 
-const ProjectCard = ({
+const ProjectBlock = ({
   project,
-  variant,
+  flip,
 }: {
   project: RenderProject;
-  variant: 'featured' | 'default';
+  flip: boolean;
 }) => {
-  const isFeatured = variant === 'featured';
+  const ref = useReveal<HTMLElement>();
 
   return (
     <article
-      className={`group relative overflow-hidden rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 ${
-        isFeatured ? 'md:grid md:grid-cols-2' : 'flex flex-col'
-      }`}
+      ref={ref}
+      className='reveal hover-lift group overflow-hidden rounded-2xl border border-border bg-card'
     >
-      {/* Hover glow overlay */}
-      <div className='absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none' />
-
-      {/* Image */}
       <div
-        className={`relative overflow-hidden ${
-          isFeatured ? 'h-72 md:h-full' : 'h-56'
+        className={`grid grid-cols-1 lg:grid-cols-2 ${
+          flip ? 'lg:[&>*:first-child]:order-2' : ''
         }`}
       >
-        <img
-          src={project.image.img}
-          alt={project.image.alt}
-          className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105'
-        />
-        {/* Image gradient overlay */}
-        <div className='absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60' />
+        {/* Visual */}
+        <div className='relative min-h-[16rem] border-b border-border lg:min-h-[26rem] lg:border-b-0'>
+          {project.placeholder ? (
+            <PhotoReserved />
+          ) : (
+            <div className='relative h-full w-full overflow-hidden'>
+              <img
+                src={project.image?.img}
+                alt={project.image?.alt ?? project.title}
+                loading='lazy'
+                className='h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]'
+              />
+            </div>
+          )}
+        </div>
 
-        {/* Demo badge on image */}
-        {project.demo && (
-          <a
-            href={project.demo}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='absolute top-4 right-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/90 text-primary-foreground text-xs font-semibold backdrop-blur-sm hover:bg-primary transition-colors shadow-lg'
-          >
-            <span className='relative flex h-2 w-2'>
-              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75' />
-              <span className='relative inline-flex h-2 w-2 rounded-full bg-green-400' />
-            </span>
-            Live Demo
-          </a>
-        )}
-      </div>
+        {/* Content */}
+        <div className='flex flex-col justify-center gap-5 p-7 sm:p-9 lg:p-11'>
+          <div className='flex items-center gap-3 font-mono text-xs text-muted-foreground'>
+            <span className='text-primary'>{project.index}</span>
+            <span className='h-px w-8 bg-border' />
+            <span className='uppercase tracking-[0.14em]'>{project.context}</span>
+          </div>
 
-      {/* Content */}
-      <div className='relative p-6 flex flex-col justify-between flex-1 space-y-4'>
-        <div className='space-y-3'>
-          <h3
-            className={`font-bold text-foreground ${
-              isFeatured ? 'text-2xl' : 'text-xl'
-            }`}
-          >
-            {project.title}
-          </h3>
+          <div>
+            <h3 className='text-2xl font-bold tracking-tight text-foreground sm:text-3xl'>
+              {project.title}
+            </h3>
+            {project.status && (
+              <span className='mt-3 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-wide text-primary'>
+                <span className='h-1.5 w-1.5 rounded-full bg-primary' />
+                {project.status}
+              </span>
+            )}
+          </div>
 
-          <p
-            className={`text-muted-foreground leading-relaxed ${
-              isFeatured ? 'text-base' : 'text-sm'
-            }`}
-          >
-            {project.description}
-          </p>
+          <p className='max-w-xl text-muted-foreground'>{project.description}</p>
 
-          {/* Technologies */}
+          {project.highlights && (
+            <ul className='grid gap-2'>
+              {project.highlights.map((h) => (
+                <li key={h} className='flex gap-3 text-sm text-foreground/85'>
+                  <span
+                    aria-hidden
+                    className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60'
+                  />
+                  <span className='leading-relaxed'>{h}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
           <div className='flex flex-wrap gap-2 pt-1'>
             {project.tecnologies.map((tech) => (
               <span
                 key={tech}
-                className='px-2.5 py-1 text-xs font-medium rounded-lg bg-primary/10 text-primary border border-primary/20 transition-colors hover:bg-primary/20'
+                className='rounded-md border border-border px-2.5 py-1 font-mono text-xs text-muted-foreground'
               >
-                {tech.trim()}
+                {tech}
               </span>
             ))}
           </div>
-        </div>
 
-        {/* Actions */}
-        <div className='flex items-center gap-3 pt-2'>
-          <a
-            href={project.gitHub}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-muted-foreground bg-background/50 border border-border/60 hover:text-foreground hover:border-primary/30 hover:bg-primary/5 transition-all'
-          >
-            <GithubIcon className='w-4 h-4' />
-            Código
-          </a>
-          {project.demo && (
-            <a
-              href={project.demo}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-primary-foreground bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-all shadow-md shadow-primary/20'
-            >
-              Ver proyecto
-              <ArrowUpRightIcon className='w-4 h-4' />
-            </a>
+          {(project.demo || project.gitHub) && (
+            <div className='flex flex-wrap items-center gap-3 pt-2'>
+              {project.demo && (
+                <a
+                  href={project.demo}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='pressable inline-flex items-center gap-2 rounded-md bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-foreground/90'
+                >
+                  Ver demo
+                  <ArrowUpRight className='h-4 w-4' />
+                </a>
+              )}
+              {project.gitHub && (
+                <a
+                  href={project.gitHub}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='pressable inline-flex items-center gap-2 rounded-md border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-foreground/40 hover:bg-foreground/[0.03]'
+                >
+                  <Github className='h-4 w-4' />
+                  Código
+                </a>
+              )}
+            </div>
           )}
         </div>
       </div>
     </article>
   );
 };
+
+/** Intentionally-reserved frame for the meteorology portal screenshot. */
+const PhotoReserved = () => (
+  <div className='blueprint relative flex h-full min-h-[16rem] items-center justify-center p-8'>
+    <div className='flex flex-col items-center gap-3 rounded-xl border border-dashed border-border bg-background/60 px-8 py-10 text-center backdrop-blur-[2px]'>
+      <span className='grid size-11 place-items-center rounded-lg bg-muted text-muted-foreground'>
+        <ImageIcon className='h-5 w-5' />
+      </span>
+      <p className='text-sm font-medium text-foreground'>
+        Imagen del proyecto
+      </p>
+      <p className='max-w-[14rem] font-mono text-[0.7rem] uppercase tracking-wide text-muted-foreground'>
+        Espacio reservado · próximamente
+      </p>
+    </div>
+  </div>
+);
