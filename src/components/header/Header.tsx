@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { scrollToSection } from '@/hook/ScrollToSection';
+import { useTheme } from '@/hook/useTheme';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { ArrowDownToLine, MenuIcon, XIcon } from 'lucide-react';
 
 const navItems = [
@@ -12,6 +14,7 @@ const navItems = [
 export const HeaderComponent = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, cycleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24);
@@ -73,8 +76,10 @@ export const HeaderComponent = () => {
             ))}
           </div>
 
-          {/* CV + mobile toggle */}
+          {/* Theme + CV + mobile toggle */}
           <div className='flex items-center gap-2'>
+            <ThemeToggle theme={theme} onCycle={cycleTheme} />
+
             <a
               href='/Cv-Andy.pdf'
               download='Andy-Torres-CV.pdf'
