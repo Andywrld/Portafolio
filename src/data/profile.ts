@@ -30,9 +30,3 @@ export const profile = {
 
   belief: 'El código se escribe una vez y se lee cien. Optimizá para la segunda.',
 } as const;
-
-export const socials = [
-  { label: 'GitHub', href: 'https://github.com/Andywrld' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/andy-torres-9a1136259' },
-  { label: 'Email', href: `mailto:${profile.email}` },
-] as const;

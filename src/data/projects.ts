@@ -106,9 +106,3 @@ export const nextProject = (slug: string) => {
   if (index === -1) return undefined;
   return projects[(index + 1) % projects.length];
 };
-
-export const statusLabel: Record<ProjectStatus, string> = {
-  live: 'En producción',
-  wip: 'En curso',
-  archived: 'Archivado',
-};
