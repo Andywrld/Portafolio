@@ -7,8 +7,8 @@ export type ResolvedTheme = 'light' | 'dark';
 const STORAGE_KEY = 'theme';
 const DARK_QUERY = '(prefers-color-scheme: dark)';
 const THEME_COLOR: Record<ResolvedTheme, string> = {
-  light: '#fbfbfd',
-  dark: '#0c0e14',
+  light: '#faf6ef',
+  dark: '#1c1916',
 };
 
 /** 'system' is the default, so it is stored as the absence of a value. */

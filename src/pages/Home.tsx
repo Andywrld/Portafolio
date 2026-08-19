@@ -1,50 +1,43 @@
-import { Experience } from '@/components/experience/Experience';
-import { GetInTouch } from '@/components/getInTouch/GetInTouch';
-import { HeaderComponent } from '@/components/header/Header';
-import { Hero } from '@/components/Hero/Hero';
-import { Projects } from '@/components/project/Experience-Project';
-import { TechStack } from '@/components/Tech-Stack/Tech-Stack';
+import { Intro } from '@/components/home/Intro';
+import { ProjectIndex } from '@/components/home/ProjectIndex';
+import { Stack } from '@/components/home/Stack';
+import { ExperienceList } from '@/components/home/ExperienceList';
+import { Contact } from '@/components/home/Contact';
+import { Belief } from '@/components/home/Belief';
+import { Divider } from '@/components/layout/Divider';
 
-export const Home = () => {
-  return (
-    <div className='flex min-h-dvh flex-col'>
-      <HeaderComponent />
+export const Home = () => (
+  <>
+    <section id='inicio' className='scroll-mt-24'>
+      <Intro />
+    </section>
 
-      <main className='flex-1'>
-        <Hero />
+    <Divider />
 
-        <section id='experiencia' className='scroll-mt-24 py-24 sm:py-32'>
-          <Experience />
-        </section>
+    <section id='proyectos' className='scroll-mt-24'>
+      <ProjectIndex />
+    </section>
 
-        <section id='stack' className='scroll-mt-24 pb-24 sm:pb-32'>
-          <TechStack />
-        </section>
+    <Divider />
 
-        <section id='proyectos' className='scroll-mt-24 py-24 sm:py-32'>
-          <Projects />
-        </section>
+    <section id='herramientas' className='scroll-mt-24'>
+      <Stack />
+    </section>
 
-        <section id='contacto' className='scroll-mt-24 py-24 sm:py-32'>
-          <GetInTouch />
-        </section>
-      </main>
+    <Divider />
 
-      <footer className='border-t border-border'>
-        <div className='mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-10 sm:flex-row sm:px-8'>
-          <div className='flex items-center gap-2.5'>
-            <span className='grid h-7 w-7 place-items-center rounded-md bg-foreground text-[0.7rem] font-bold text-background'>
-              AT
-            </span>
-            <span className='text-sm text-muted-foreground'>
-              © {new Date().getFullYear()} Andy Torres
-            </span>
-          </div>
-          <p className='font-mono text-xs text-muted-foreground'>
-            React · Vite · Tailwind CSS — desplegado en Vercel
-          </p>
-        </div>
-      </footer>
-    </div>
-  );
-};
+    <section id='trayectoria' className='scroll-mt-24'>
+      <ExperienceList />
+    </section>
+
+    <Divider />
+
+    <section id='contacto' className='scroll-mt-24'>
+      <Contact />
+    </section>
+
+    <Divider />
+
+    <Belief />
+  </>
+);

@@ -7,37 +7,44 @@
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 /*
-  Design system — "engineered specimen"
-  High-contrast, one committed accent (vermilion).
-  No gradient text, no glassmorphism, no neon. Type + precision carry it.
-  Light is the base scale below; dark overrides the same tokens.
+  Design system — "working document"
+  The page is a document you read, not a landing you scroll past: one narrow
+  column, hairline rules between movements, no cards unless a card is the
+  honest affordance.
+
+  Warm paper carries the surface; vermilion carries the identity. The accent is
+  scarce on purpose — it marks state (live, current, selected) and nothing else,
+  so when it appears it means something.
 */
 
 @theme {
   --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', 'Geist Mono', 'Menlo', monospace;
 
-  /* Surfaces — cool near-white paper, not warm cream */
-  --color-background: oklch(0.986 0.003 255);
-  --color-foreground: oklch(0.205 0.02 265);
+  /* The whole layout hangs off this one measure: ~75ch of body copy. */
+  --container-doc: 34rem;
 
-  --color-card: oklch(0.972 0.004 255);
-  --color-card-foreground: oklch(0.205 0.02 265);
+  /* Surfaces — warm paper */
+  --color-background: oklch(0.972 0.011 85);
+  --color-foreground: oklch(0.235 0.017 65);
 
-  --color-popover: oklch(0.986 0.003 255);
-  --color-popover-foreground: oklch(0.205 0.02 265);
+  --color-card: oklch(0.945 0.014 83);
+  --color-card-foreground: oklch(0.235 0.017 65);
 
-  /* Ink scale */
-  --color-muted: oklch(0.955 0.004 255);
-  --color-muted-foreground: oklch(0.46 0.017 265); /* ~7:1 on paper */
+  --color-popover: oklch(0.972 0.011 85);
+  --color-popover-foreground: oklch(0.235 0.017 65);
 
-  /* Accent — persimmon / vermilion. Warm tension on cool paper. */
+  /* Ink scale — muted-foreground is 5.6:1 on paper, not decorative gray */
+  --color-muted: oklch(0.928 0.016 82);
+  --color-muted-foreground: oklch(0.5 0.018 65);
+
+  /* Accent — vermilion. The one committed color. */
   --color-primary: oklch(0.56 0.192 33);
   --color-primary-foreground: oklch(0.99 0.005 60);
 
   /* Deep ink — for inverted blocks */
-  --color-secondary: oklch(0.22 0.022 265);
-  --color-secondary-foreground: oklch(0.97 0.004 255);
+  --color-secondary: oklch(0.245 0.018 65);
+  --color-secondary-foreground: oklch(0.97 0.008 85);
 
   --color-accent: oklch(0.56 0.192 33);
   --color-accent-foreground: oklch(0.99 0.005 60);
@@ -45,22 +52,30 @@
   --color-destructive: oklch(0.55 0.2 27);
   --color-destructive-foreground: oklch(0.99 0.005 60);
 
-  --color-border: oklch(0.9 0.006 260);
-  --color-input: oklch(0.9 0.006 260);
+  --color-success: oklch(0.62 0.15 155);
+
+  --color-border: oklch(0.874 0.016 72);
+  --color-input: oklch(0.874 0.016 72);
   --color-ring: oklch(0.56 0.192 33);
 
   --radius: 0.5rem;
 
-  /* Emil easings — CSS built-ins are too weak */
+  /* Exponential ease-outs. CSS built-ins are too weak to read as intentional. */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* Semantic stacking order. Never write a bare 9999. */
+  --z-sticky: 30;
+  --z-nav: 40;
+  --z-overlay: 50;
+  --z-modal: 60;
 }
 
 /* ── Dark scale ──
-   Same structure, same accent identity. Cool ink instead of cool paper.
-   The accent is lifted (L 0.56 → 0.70) because vermilion at paper luminance
-   drops to ~3:1 on dark ink; at 0.70 it reads 6.8:1 and takes dark text.
+   Warm ink, not cool slate: the paper turns down, it doesn't change species.
+   The accent lifts (L 0.56 → 0.71) because vermilion at paper luminance drops
+   to ~3:1 on dark ink; at 0.71 it reads 7:1 and still takes dark text.
    Unlayered on purpose: these must win over the @theme layer's :root. */
 :root {
   color-scheme: light;
@@ -69,34 +84,36 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --color-background: oklch(0.165 0.012 265);
-  --color-foreground: oklch(0.955 0.005 255);
+  --color-background: oklch(0.178 0.009 62);
+  --color-foreground: oklch(0.945 0.008 85);
 
-  --color-card: oklch(0.205 0.014 265);
-  --color-card-foreground: oklch(0.955 0.005 255);
+  --color-card: oklch(0.222 0.011 62);
+  --color-card-foreground: oklch(0.945 0.008 85);
 
-  --color-popover: oklch(0.205 0.014 265);
-  --color-popover-foreground: oklch(0.955 0.005 255);
+  --color-popover: oklch(0.222 0.011 62);
+  --color-popover-foreground: oklch(0.945 0.008 85);
 
-  --color-muted: oklch(0.235 0.014 265);
-  --color-muted-foreground: oklch(0.715 0.015 265); /* ~7.6:1 on ink */
+  --color-muted: oklch(0.248 0.012 62);
+  --color-muted-foreground: oklch(0.715 0.014 70);
 
-  --color-primary: oklch(0.7 0.165 38);
-  --color-primary-foreground: oklch(0.17 0.03 35);
+  --color-primary: oklch(0.71 0.163 40);
+  --color-primary-foreground: oklch(0.18 0.03 35);
 
   /* Inverted blocks flip with the surface: light slab, ink type */
-  --color-secondary: oklch(0.93 0.006 255);
-  --color-secondary-foreground: oklch(0.18 0.02 265);
+  --color-secondary: oklch(0.93 0.01 85);
+  --color-secondary-foreground: oklch(0.2 0.016 65);
 
-  --color-accent: oklch(0.7 0.165 38);
-  --color-accent-foreground: oklch(0.17 0.03 35);
+  --color-accent: oklch(0.71 0.163 40);
+  --color-accent-foreground: oklch(0.18 0.03 35);
 
   --color-destructive: oklch(0.68 0.18 25);
   --color-destructive-foreground: oklch(0.16 0.02 25);
 
-  --color-border: oklch(0.295 0.013 265);
-  --color-input: oklch(0.295 0.013 265);
-  --color-ring: oklch(0.7 0.165 38);
+  --color-success: oklch(0.72 0.16 158);
+
+  --color-border: oklch(0.305 0.012 64);
+  --color-input: oklch(0.305 0.012 64);
+  --color-ring: oklch(0.71 0.163 40);
 }
 
 @layer base {
@@ -106,7 +123,7 @@
 
   html {
     scroll-behavior: smooth;
-    /* Fixed header offset for anchor scrolling */
+    /* Clears the floating pill nav on anchor jumps */
     scroll-padding-top: 6rem;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -122,11 +139,13 @@
     color: var(--color-primary-foreground);
   }
 
-  /* Balanced headings, pretty prose */
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     text-wrap: balance;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.025em;
   }
+
   p {
     text-wrap: pretty;
   }
@@ -138,49 +157,85 @@
   }
 }
 
+/* ── Tagged label ──
+   The signature move: a subtitle sitting in a highlight swatch with four live
+   corner handles, the way a selected element looks inside a design tool. It
+   says "this page is still on the workbench" without a word of copy.
+   Handles are vermilion — that is the part that is ours. */
+.tagged {
+  position: relative;
+  display: inline-block;
+  background: var(--color-muted);
+  padding: 0.3rem 0.45rem;
+}
+
+.tagged::before,
+.tagged::after,
+.tagged > .tagged-handle {
+  content: '';
+  position: absolute;
+  height: 0.3rem;
+  width: 0.3rem;
+  border-radius: 9999px;
+  background: var(--color-primary);
+  animation: handle-pulse 2.6s var(--ease-in-out-strong) infinite;
+}
+
+.tagged::before {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.tagged::after {
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.tagged > .tagged-handle:first-of-type {
+  bottom: 0;
+  left: 0;
+  transform: translate(-50%, 50%);
+  animation-delay: 0.65s;
+}
+
+.tagged > .tagged-handle:last-of-type {
+  right: 0;
+  bottom: 0;
+  transform: translate(50%, 50%);
+  animation-delay: 1.3s;
+}
+
+@keyframes handle-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
 /* ── Reveal on scroll ──
-   Content is visible by default; the hidden pre-state only applies
-   when JS is present (html.js), so no-JS / headless renders never ship blank. */
+   Content is visible by default; the hidden pre-state only applies when JS is
+   present (html.js), so a headless render or a background tab never ships a
+   blank section. */
 .reveal {
   opacity: 1;
 }
 
 html.js .reveal {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(10px);
   transition:
-    opacity 0.7s var(--ease-out-expo),
-    transform 0.7s var(--ease-out-expo);
-  will-change: opacity, transform;
+    opacity 0.55s var(--ease-out-expo),
+    transform 0.55s var(--ease-out-expo);
 }
 
 html.js .reveal.is-visible {
   opacity: 1;
   transform: none;
-}
-
-/* Stagger children of a revealed group */
-html.js .reveal[data-stagger].is-visible > * {
-  animation: reveal-item 0.6s var(--ease-out-expo) both;
-}
-html.js .reveal[data-stagger].is-visible > *:nth-child(1) { animation-delay: 0ms; }
-html.js .reveal[data-stagger].is-visible > *:nth-child(2) { animation-delay: 60ms; }
-html.js .reveal[data-stagger].is-visible > *:nth-child(3) { animation-delay: 120ms; }
-html.js .reveal[data-stagger].is-visible > *:nth-child(4) { animation-delay: 180ms; }
-html.js .reveal[data-stagger].is-visible > *:nth-child(5) { animation-delay: 240ms; }
-html.js .reveal[data-stagger].is-visible > *:nth-child(6) { animation-delay: 300ms; }
-html.js .reveal[data-stagger].is-visible > *:nth-child(7) { animation-delay: 360ms; }
-html.js .reveal[data-stagger].is-visible > *:nth-child(8) { animation-delay: 420ms; }
-
-@keyframes reveal-item {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 /* ── Theme switch ──
@@ -207,6 +262,7 @@ html.theme-switching *::after {
     transform: none;
   }
 }
+
 .theme-icon {
   display: grid;
   place-items: center;
@@ -215,15 +271,15 @@ html.theme-switching *::after {
 
 /* ── Micro utilities ── */
 
-/* Pressable feedback — the interface should feel like it's listening */
+/* Pressable feedback — the interface should feel like it is listening */
 .pressable {
   transition: transform 0.16s var(--ease-out-quart);
 }
+
 .pressable:active {
   transform: scale(0.97);
 }
 
-/* Animated underline for links / nav */
 .link-underline {
   background-image: linear-gradient(currentColor, currentColor);
   background-size: 0% 1.5px;
@@ -231,39 +287,9 @@ html.theme-switching *::after {
   background-repeat: no-repeat;
   transition: background-size 0.35s var(--ease-out-expo);
 }
+
 .link-underline:hover {
   background-size: 100% 1.5px;
-}
-
-/* Blueprint dot grid — subtle engineering texture, not neon */
-.blueprint {
-  background-image: radial-gradient(
-    var(--color-border) 1px,
-    transparent 1px
-  );
-  background-size: 22px 22px;
-}
-
-/* Hairline that fades out — replaces the gradient rules */
-.hairline {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    var(--color-border),
-    transparent
-  );
-}
-
-/* Marquee for the tech ticker */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track {
-  animation: marquee 32s linear infinite;
-}
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
 }
 
 /* ── Reduced motion: keep meaning, drop movement ── */
@@ -276,10 +302,9 @@ html.theme-switching *::after {
     transform: none !important;
     transition: opacity 0.3s ease;
   }
-  html.js .reveal[data-stagger].is-visible > * {
-    animation: none;
-  }
-  .marquee-track {
+  .tagged::before,
+  .tagged::after,
+  .tagged > .tagged-handle {
     animation: none;
   }
   .pressable:active {
@@ -293,15 +318,5 @@ html.theme-switching *::after {
   html.theme-switching *::before,
   html.theme-switching *::after {
     transition: none !important;
-  }
-}
-
-/* Hover intent only on real pointers */
-@media (hover: hover) and (pointer: fine) {
-  .hover-lift {
-    transition: transform 0.4s var(--ease-out-expo), border-color 0.3s ease;
-  }
-  .hover-lift:hover {
-    transform: translateY(-4px);
   }
 }

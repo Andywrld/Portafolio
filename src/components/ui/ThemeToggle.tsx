@@ -19,13 +19,13 @@ export const ThemeToggle = ({ theme, onCycle }: ThemeToggleProps) => {
     <button
       type='button'
       onClick={onCycle}
-      className='pressable grid size-10 place-items-center rounded-md text-muted-foreground transition-colors hover:bg-foreground/[0.05] hover:text-foreground'
+      className='pressable grid size-8 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
       aria-label={`Tema: ${label}. Cambiar tema`}
       title={`Tema: ${label}`}
     >
       {/* Keyed so each change replays the swap animation */}
       <span key={theme} className='theme-icon'>
-        <Icon className='h-[1.15rem] w-[1.15rem]' />
+        <Icon className='h-4 w-4' />
       </span>
     </button>
   );
