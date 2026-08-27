@@ -18,7 +18,7 @@ export const ProjectDetail = () => {
   if (!project) return <Navigate to='/' replace />;
 
   const next = nextProject(project.slug);
-  const { demo, repo } = project.links;
+  const { demo, repo, note } = project.links;
 
   return (
     <article>
@@ -80,6 +80,14 @@ export const ProjectDetail = () => {
           </span>
           <span>{project.context}</span>
         </div>
+
+        {/* Access caveat — a link that only works from one country, or a repo
+            that is not public, is worth saying before someone clicks it. */}
+        {note && (
+          <p className='mt-2 text-xs leading-relaxed text-muted-foreground/80'>
+            {note}
+          </p>
+        )}
 
         <div className='group mt-3'>
           <TechChips chips={project.chips} />

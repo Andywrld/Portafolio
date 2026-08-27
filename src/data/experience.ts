@@ -12,6 +12,19 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
+    company: 'Jade Technology Group',
+    position: 'Desarrollador Fullstack',
+    type: 'Tiempo completo',
+    period: 'Jul 2026 — Actualidad',
+    current: true,
+    bullets: [
+      'Desarrollo fullstack de MaxiHabana, el supermercado online de la empresa, hoy en producción.',
+      'Construí el catálogo, la navegación por categorías y el flujo de compra sobre Next.js con App Router, cuidando el rendimiento en conexiones lentas.',
+      'Implementé la API en Nest.js que sostiene catálogo, pedidos y autenticación, manteniendo un solo contrato de tipos entre backend y frontend.',
+      'Definí la estructura de componentes y las convenciones del proyecto para que el producto siga creciendo sin rehacer lo ya entregado.',
+    ],
+  },
+  {
     company: 'Tecopos',
     companyUrl: 'https://www.tecopos.com/',
     position: 'Líder Técnico Frontend',

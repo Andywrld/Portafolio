@@ -1,4 +1,5 @@
-import bankFlowCover from '@/assets/images/Bank-Flow.webp';
+import bankFlowCover from '@/assets/images/bank-flow.webp';
+import maxiHabanaCover from '@/assets/images/maxihabana.webp';
 import meteoCover from '@/assets/images/meteo-portal.webp';
 import { chipsFor, type TechChip } from './tech';
 
@@ -23,10 +24,51 @@ export type Project = {
   features: string[];
   /** Full stack as prose lines — richer than a chip, no icon required. */
   stack: string[];
-  links: { demo?: string; repo?: string };
+  links: {
+    demo?: string;
+    repo?: string;
+    /** Caveat about the links above — restricted region, private repository. */
+    note?: string;
+  };
 };
 
 export const projects: Project[] = [
+  {
+    slug: 'maxihabana',
+    name: 'MaxiHabana',
+    year: '2026',
+    status: 'live',
+    tagline:
+      'Supermercado online para La Habana: catálogo por departamentos, ofertas, carrito y entrega según provincia y municipio.',
+    cover: {
+      src: maxiHabanaCover,
+      alt: 'Catálogo de MaxiHabana con los filtros por departamento y precio junto a la grilla de productos',
+    },
+    chips: chipsFor(['Next.js', 'React', 'TypeScript', 'Nest.js', 'Tailwind CSS']),
+    role: 'Desarrollo fullstack',
+    context: 'Jade Technology Group',
+    overview:
+      'Tienda online construida de punta a punta: Next.js con App Router en el cliente, Nest.js en el servidor. El reto real no era listar productos: era que alguien con una conexión lenta pudiera encontrar lo que busca, entender qué está disponible en su municipio y llegar al carrito sin fricción. Cada decisión de renderizado se tomó mirando ese escenario, no el de una oficina con fibra.',
+    features: [
+      'Catálogo con búsqueda, navegación por categorías y vistas dedicadas para destacados y productos en oferta.',
+      'Selector de ubicación por provincia y municipio que condiciona la disponibilidad y la entrega.',
+      'Carrito de compra persistente y flujo de checkout con los métodos de pago del negocio.',
+      'Cuentas de usuario con autenticación y seguimiento de pedidos, resueltas contra una API propia en Nest.js.',
+      'Páginas institucionales y de contacto gestionadas como contenido, no como código.',
+      'Estados vacíos diseñados: cuando una sección todavía no tiene productos, explica qué falta en vez de mostrar un hueco.',
+    ],
+    stack: [
+      'Next.js (App Router) · React · TypeScript',
+      'Nest.js para la API: catálogo, pedidos y autenticación',
+      'Tailwind CSS para el sistema visual',
+      'Renderizado en servidor y componentes de cliente según el costo de cada vista',
+      'Despliegue en producción bajo dominio propio',
+    ],
+    links: {
+      demo: 'https://www.maxihabana.com/',
+      note: 'Repositorio privado por acuerdo con el cliente; el sitio en producción es público.',
+    },
+  },
   {
     slug: 'portal-meteorologico-insmet',
     name: 'Portal Meteorológico INSMET',
@@ -59,7 +101,10 @@ export const projects: Project[] = [
       'Framer Motion para transiciones de vista',
       'Docker para empaquetado y despliegue',
     ],
-    links: { demo: 'https://meteo.dev.citmatel.cu/' },
+    links: {
+      demo: 'https://meteo.dev.citmatel.cu/',
+      note: 'El portal está alojado en infraestructura nacional: solo es accesible desde Cuba.',
+    },
   },
   {
     slug: 'bankflow',
@@ -70,7 +115,7 @@ export const projects: Project[] = [
       'Simulador de banca digital: apertura de cuentas, ingresos y retiros con validación en tiempo real e historial por usuario.',
     cover: {
       src: bankFlowCover,
-      alt: 'Panel de BankFlow mostrando el saldo de una cuenta y su historial de movimientos',
+      alt: 'Resumen de BankFlow con los saldos agrupados por moneda y el listado de cuentas del usuario',
     },
     chips: chipsFor(['React', 'TypeScript', 'Tailwind CSS']),
     role: 'Desarrollo completo',
