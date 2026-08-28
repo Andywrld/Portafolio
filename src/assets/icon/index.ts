@@ -12,6 +12,8 @@ import PostmanIcon from './Postman.svg';
 import NestIcon from './Nest.js.svg';
 import RestIcon from './DjangoREST.svg';
 import Next from './nextjs_icon_dark.svg';
+import VueIcon from './Vue.svg';
+import NuxtIcon from './Nuxt.svg';
 
 export {
   HTMLIcon,
@@ -27,4 +29,6 @@ export {
   NestIcon,
   RestIcon,
   Next,
+  VueIcon,
+  NuxtIcon,
 };

@@ -5,6 +5,9 @@ import { chipsFor, type TechChip } from './tech';
 
 export type ProjectStatus = 'live' | 'archived' | 'wip';
 
+/** Which framework a project is presented with when the same work exists in two stacks. */
+export type StackVariant = 'next' | 'vue';
+
 export type Project = {
   /** URL segment under /proyectos/ — never change one that is already shared. */
   slug: string;
@@ -16,6 +19,8 @@ export type Project = {
   cover?: { src: string; alt: string };
   /** Chips in the index row; only tech with a registered mark survives. */
   chips: TechChip[];
+  /** Set only on projects that ship a stack variant — drives chips, stack and overview. */
+  stackVariant?: StackVariant;
 
   /* Detail page */
   role: string;
@@ -32,31 +37,18 @@ export type Project = {
   };
 };
 
-export const projects: Project[] = [
-  {
-    slug: 'maxihabana',
-    name: 'MaxiHabana',
-    year: '2026',
-    status: 'live',
-    tagline:
-      'Supermercado online para La Habana: catálogo por departamentos, ofertas, carrito y entrega según provincia y municipio.',
-    cover: {
-      src: maxiHabanaCover,
-      alt: 'Catálogo de MaxiHabana con los filtros por departamento y precio junto a la grilla de productos',
-    },
+/**
+ * MaxiHabana ships in two framework flavours. Everything outside these three
+ * fields — features, links, cover — describes the same product either way.
+ */
+const maxiHabanaByVariant: Record<
+  StackVariant,
+  Pick<Project, 'chips' | 'overview' | 'stack'>
+> = {
+  next: {
     chips: chipsFor(['Next.js', 'React', 'TypeScript', 'Nest.js', 'Tailwind CSS']),
-    role: 'Desarrollo fullstack',
-    context: 'Jade Technology Group',
     overview:
       'Tienda online construida de punta a punta: Next.js con App Router en el cliente, Nest.js en el servidor. El reto real no era listar productos: era que alguien con una conexión lenta pudiera encontrar lo que busca, entender qué está disponible en su municipio y llegar al carrito sin fricción. Cada decisión de renderizado se tomó mirando ese escenario, no el de una oficina con fibra.',
-    features: [
-      'Catálogo con búsqueda, navegación por categorías y vistas dedicadas para destacados y productos en oferta.',
-      'Selector de ubicación por provincia y municipio que condiciona la disponibilidad y la entrega.',
-      'Carrito de compra persistente y flujo de checkout con los métodos de pago del negocio.',
-      'Cuentas de usuario con autenticación y seguimiento de pedidos, resueltas contra una API propia en Nest.js.',
-      'Páginas institucionales y de contacto gestionadas como contenido, no como código.',
-      'Estados vacíos diseñados: cuando una sección todavía no tiene productos, explica qué falta en vez de mostrar un hueco.',
-    ],
     stack: [
       'Next.js (App Router) · React · TypeScript',
       'Nest.js para la API: catálogo, pedidos y autenticación',
@@ -64,11 +56,52 @@ export const projects: Project[] = [
       'Renderizado en servidor y componentes de cliente según el costo de cada vista',
       'Despliegue en producción bajo dominio propio',
     ],
-    links: {
-      demo: 'https://www.maxihabana.com/',
-      note: 'Repositorio privado por acuerdo con el cliente; el sitio en producción es público.',
-    },
   },
+  vue: {
+    chips: chipsFor(['Nuxt', 'Vue', 'TypeScript', 'Nest.js', 'Tailwind CSS']),
+    overview:
+      'Tienda online construida de punta a punta: Nuxt y Vue 3 en el cliente, Nest.js en el servidor. El reto real no era listar productos: era que alguien con una conexión lenta pudiera encontrar lo que busca, entender qué está disponible en su municipio y llegar al carrito sin fricción. Cada decisión de renderizado se tomó mirando ese escenario, no el de una oficina con fibra.',
+    stack: [
+      'Nuxt · Vue 3 · TypeScript',
+      'Nest.js para la API: catálogo, pedidos y autenticación',
+      'Tailwind CSS para el sistema visual',
+      'Renderizado en servidor e hidratación selectiva según el costo de cada vista',
+      'Despliegue en producción bajo dominio propio',
+    ],
+  },
+};
+
+const maxiHabana = (stackVariant: StackVariant): Project => ({
+  slug: 'maxihabana',
+  name: 'MaxiHabana',
+  year: '2026',
+  status: 'live',
+  tagline:
+    'Supermercado online para La Habana: catálogo por departamentos, ofertas, carrito y entrega según provincia y municipio.',
+  cover: {
+    src: maxiHabanaCover,
+    alt: 'Catálogo de MaxiHabana con los filtros por departamento y precio junto a la grilla de productos',
+  },
+  stackVariant,
+  ...maxiHabanaByVariant[stackVariant],
+  role: 'Desarrollo fullstack',
+  context: 'Jade Technology Group',
+  features: [
+    'Catálogo con búsqueda, navegación por categorías y vistas dedicadas para destacados y productos en oferta.',
+    'Selector de ubicación por provincia y municipio que condiciona la disponibilidad y la entrega.',
+    'Carrito de compra persistente y flujo de checkout con los métodos de pago del negocio.',
+    'Cuentas de usuario con autenticación y seguimiento de pedidos, resueltas contra una API propia en Nest.js.',
+    'Páginas institucionales y de contacto gestionadas como contenido, no como código.',
+    'Estados vacíos diseñados: cuando una sección todavía no tiene productos, explica qué falta en vez de mostrar un hueco.',
+  ],
+  links: {
+    demo: 'https://www.maxihabana.com/',
+    note: 'Repositorio privado por acuerdo con el cliente; el sitio en producción es público.',
+  },
+});
+
+export const projects: Project[] = [
+  maxiHabana('vue'),
   {
     slug: 'portal-meteorologico-insmet',
     name: 'Portal Meteorológico INSMET',

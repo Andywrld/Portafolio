@@ -6,12 +6,14 @@ import {
   JavaScriptIcon,
   NestIcon,
   Next,
+  NuxtIcon,
   PostgreSQLIcon,
   PostmanIcon,
   ReactIcon,
   RestIcon,
   TailwindCSSIcon,
   TypeScriptIcon,
+  VueIcon,
 } from '@/assets/icon';
 
 /**
@@ -26,6 +28,8 @@ const iconByTech: Record<string, string> = {
   TypeScript: TypeScriptIcon,
   JavaScript: JavaScriptIcon,
   'Next.js': Next,
+  Vue: VueIcon,
+  Nuxt: NuxtIcon,
   'Tailwind CSS': TailwindCSSIcon,
   HTML: HTMLIcon,
   CSS: CSSIcon,
@@ -55,7 +59,7 @@ const group = (category: string, names: string[]): TechGroup => ({
 
 export const techGroups: TechGroup[] = [
   group('Lenguajes', ['TypeScript', 'JavaScript', 'HTML', 'CSS']),
-  group('Frontend', ['React', 'Next.js', 'Tailwind CSS']),
+  group('Frontend', ['React', 'Next.js', 'Vue', 'Tailwind CSS']),
   group('Backend', ['Nest.js', 'Django REST', 'PostgreSQL']),
   group('Herramientas', ['Git', 'Docker', 'Postman']),
 ];
