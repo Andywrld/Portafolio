@@ -46,7 +46,7 @@ export const experiences: Experience[] = [
     companyUrl: 'https://www.citmatel.cu/es',
     position: 'Desarrollador Frontend',
     type: 'Tiempo completo',
-    period: 'Ene 2025 — Jul 2025',
+    period: 'Ene 2025 — Ago 2025',
     bullets: [
       'Desarrollé y lideré la arquitectura frontend del portal oficial de meteorología de Cuba (INSMET), hoy en producción.',
       'Implementé las interfaces de consulta pública priorizando legibilidad de datos y comportamiento en conexiones lentas.',

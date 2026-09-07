@@ -101,7 +101,7 @@ const maxiHabana = (stackVariant: StackVariant): Project => ({
 });
 
 export const projects: Project[] = [
-  maxiHabana('vue'),
+  maxiHabana('next'),
   {
     slug: 'portal-meteorologico-insmet',
     name: 'Portal Meteorológico INSMET',
