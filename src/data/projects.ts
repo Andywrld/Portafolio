@@ -1,5 +1,5 @@
-import bankFlowCover from '@/assets/images/bank-flow.webp';
-import maxiHabanaCover from '@/assets/images/maxihabana.webp';
+import bankFlowCover from '@/assets/images/Bank-Flow.webp';
+import maxiHabanaCover from '@/assets/images/maxihabana.webp';  
 import meteoCover from '@/assets/images/meteo-portal.webp';
 import { chipsFor, type TechChip } from './tech';
 
